@@ -1,0 +1,11 @@
+services:
+  evolution-openbot-bridge:
+    build: .
+    restart: unless-stopped
+    environment:
+      PORT: "8080"
+      OPENBOT_WEBHOOK_URL: "${OPENBOT_WEBHOOK_URL:?set in Coolify}"
+      WEBHOOK_SHARED_SECRET: "${WEBHOOK_SHARED_SECRET:?set in Coolify}"
+      EVOLUTION_INSTANCE_NAME: "Paut"
+    expose:
+      - "8080"
