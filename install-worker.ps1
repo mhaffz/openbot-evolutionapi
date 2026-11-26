@@ -8,7 +8,7 @@ $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$worker`""
 $action = New-ScheduledTaskAction -Execute $powershell -Argument $arguments
 $trigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
 $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Limited
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Seconds 0) -MultipleInstances IgnoreNew
+$settings = New-ScheduledTaskSettingsSet -Hidden -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Seconds 0) -MultipleInstances IgnoreNew
 $task = New-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -Settings $settings
 Register-ScheduledTask -TaskName $taskName -InputObject $task -Force | Out-Null
 Start-ScheduledTask -TaskName $taskName
